@@ -1,0 +1,41 @@
+﻿<Window x:Class="audio_controller.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:audio_controller"
+        mc:Ignorable="d"
+        Title="Audio Controller" Height="450" Width="300"
+        WindowStyle="None" AllowsTransparency="True" Background="Transparent">
+    <Border Background="#1e1e1e" CornerRadius="10">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="35"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <!-- タイトルバー（ここをつまんでウィンドウを動かせる） -->
+            <Grid Grid.Row="0" Background="Transparent" MouseLeftButtonDown="TitleBar_MouseLeftButtonDown">
+                <TextBlock Text="Audio Controller" Foreground="White" VerticalAlignment="Center" Margin="15,0,0,0" FontWeight="Bold" FontSize="12"/>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,0,5,0">
+                    <Button Content="🗕" Width="30" Height="25" Background="Transparent" Foreground="White" BorderThickness="0" Click="MinimizeButton_Click" Cursor="Hand"/>
+                    <Button Content="✕" Width="30" Height="25" Background="Transparent" Foreground="White" BorderThickness="0" Click="CloseButton_Click" Cursor="Hand"/>
+                </StackPanel>
+            </Grid>
+
+            <!-- メインコンテンツ（スライダー一覧） -->
+            <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
+                <ItemsControl x:Name="AppVolumeList" Margin="20,10,20,20">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Margin="0,10">
+                                <TextBlock Text="{Binding AppName}" Foreground="White" FontWeight="Bold" Margin="0,0,0,5" />
+                                <Slider Minimum="0" Maximum="100" Value="{Binding Volume, Mode=TwoWay}" />
+                            </StackPanel>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </ScrollViewer>
+        </Grid>
+    </Border>
+</Window>
